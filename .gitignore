@@ -1,0 +1,26 @@
+# Ignore Unity specific temp files
+Temp/
+Library/
+Logs/
+MemoryCaptures/
+.vs/
+.idea/
+.vscode/
+
+# Ignore build folders
+Builds/
+Build/
+
+# Ignore user-specific settings
+*.user
+*.suo
+*.userprefs
+*.csproj
+*.pidb
+*.sln
+*.sln*
+*.unityproj
+
+# Ignore generated files
+obj/
+bin/
