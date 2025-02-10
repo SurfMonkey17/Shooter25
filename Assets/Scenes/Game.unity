@@ -228,6 +228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3.5
+  _laserPrefab: {fileID: 3250319940327787878, guid: b6dc2209fb04d574cb3736ff9acaff83,
+    type: 3}
 --- !u!1 &940040865
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +425,7 @@ PrefabInstance:
     - target: {fileID: 4426556907091046394, guid: b6dc2209fb04d574cb3736ff9acaff83,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.002
+      value: 0.028
       objectReference: {fileID: 0}
     - target: {fileID: 4426556907091046394, guid: b6dc2209fb04d574cb3736ff9acaff83,
         type: 3}
@@ -433,7 +435,7 @@ PrefabInstance:
     - target: {fileID: 4426556907091046394, guid: b6dc2209fb04d574cb3736ff9acaff83,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.092
+      value: -0.106
       objectReference: {fileID: 0}
     - target: {fileID: 4426556907091046394, guid: b6dc2209fb04d574cb3736ff9acaff83,
         type: 3}
@@ -470,11 +472,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8318137772712582867, guid: b6dc2209fb04d574cb3736ff9acaff83,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c1d9ba9d357d45a48b173a7ae335c571, type: 2}
-    m_RemovedComponents:
-    - {fileID: 225487426, guid: b6dc2209fb04d574cb3736ff9acaff83, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6dc2209fb04d574cb3736ff9acaff83, type: 3}
