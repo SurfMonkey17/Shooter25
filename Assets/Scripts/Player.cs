@@ -5,23 +5,24 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.5f;
-    [SerializeField] GameObject _laserPrefab; 
+    [SerializeField] GameObject _laserPrefab;
+
+    [Header("Boundaries")]
+    [SerializeField] private float _topBoundary = 0f;
+    [SerializeField] private float _bottomBoundary = -3.8f;
+    [SerializeField] private float _leftBoundary = -11.3f;
+    [SerializeField] private float _rightBoundary = 11.3f; 
 
 
-    // Start is called before the first frame update
     void Start()
     {
-        // set starting position to (0,0,0)
         transform.position = new Vector3(0, 0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         CalculateMovement();
-        fireLaser();
-        
-    }
+     }
 
     void CalculateMovement()
     {
@@ -32,16 +33,10 @@ public class Player : MonoBehaviour
 
         transform.Translate(direction * _speed * Time.deltaTime);
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0.0f));
-        
-        if (transform.position.x > 11.3f)
-        {
-            transform.position = new Vector3(-11.3f, transform.position.y, 0);
-        }
-        else if (transform.position.x < -11.3f)
-        {
-            transform.position = new Vector3(11.3f, transform.position.y, 0);
-        }
+        float clampedY = Mathf.Clamp(transform.position.y, _bottomBoundary, _topBoundary);
+        float wrappedX = Mathf.Repeat(transform.position.x - _leftBoundary, _rightBoundary - _leftBoundary) + _leftBoundary;
+
+        transform.position = new Vector3(wrappedX, clampedY, 0); 
     }
 
     void fireLaser()
