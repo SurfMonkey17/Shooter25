@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _topBoundary = 0f;
     [SerializeField] private float _bottomBoundary = -3.8f;
     [SerializeField] private float _leftBoundary = -11.3f;
-    [SerializeField] private float _rightBoundary = 11.3f; 
-
+    [SerializeField] private float _rightBoundary = 11.3f;
+  
 
     void Start()
     {
@@ -44,8 +44,10 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)){
 
-            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 0.8f, 0);
 
+            Instantiate(_laserPrefab, spawnPosition, Quaternion.identity);
+            
         }
     }
 }
