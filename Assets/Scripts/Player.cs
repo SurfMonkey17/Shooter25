@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+        FireLaser();
      }
 
     void CalculateMovement()
@@ -39,7 +40,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(wrappedX, clampedY, 0); 
     }
 
-    void fireLaser()
+    void FireLaser()
     {
         if (Input.GetKeyDown(KeyCode.Space)){
 
