@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 3.5f;
-    [SerializeField] GameObject _laserPrefab;
+    [SerializeField] private float _speed = 5f;
+    [SerializeField] private GameObject _laserPrefab;
 
     [Header("Boundaries")]
     [SerializeField] private float _topBoundary = 0f;
@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
         {
             FireLaser();
         }
+
+        
     }
 
     void CalculateMovement()
