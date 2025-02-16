@@ -7,11 +7,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private float _enemySpeed = 4f;
 
-    [Header("Boundaries")]
-    [SerializeField] private float _topBoundary = 7.8f;
-    [SerializeField] private float _bottomBoundary = -5.7f;
-    [SerializeField] private float _leftBoundary = -9f;
-    [SerializeField] private float _rightBoundary = 9f;
+    
+    private float _topBoundary = 7.8f;
+    private float _bottomBoundary = -5.7f;
+    private float _leftBoundary = -9f;
+    private float _rightBoundary = 9f;
 
     void Start()
     {
@@ -34,7 +34,29 @@ public class Enemy : MonoBehaviour
 
         }
 
+    }    
+
+    private void OnTriggerEnter(Collider other)
+    {
+            //if other is player
+        if (other == GameObject.FindWithTag("Player"))
+        {
+            Destroy(this.gameObject);
+            Debug.Log("destroy enemy");
+        }
+            //damage the player
+
+            //if other is laser
+
+        if (other == GameObject.FindWithTag("Laser")){
+
+            Destroy(this.gameObject);
+            Debug.Log("Laser destroy enemy");
+        }
+         
     }
+
+    
 
 }
        
