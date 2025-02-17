@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
-    [SerializeField] private GameObject _laserPrefab;
+    [SerializeField] private int _lives = 3; 
 
     [Header("Boundaries")]
     [SerializeField] private float _topBoundary = 0f;
@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _rightBoundary = 11.3f;
 
     [Header("Laser")]
+    [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private float _fireRate = 0.15f;
     private float _canFire = -1f;
   
@@ -50,10 +51,22 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(wrappedX, clampedY, 0); 
     }
 
+    public void Damage()
+    {
+        _lives --;
+
+            if (_lives < 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void FireLaser()
     {     
         _canFire = Time.time + _fireRate;
         Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity); 
 
     }
+    
+
 }

@@ -15,13 +15,13 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     void Update()
     {
-
         EnemyMovement();
+        
     }
 
     void EnemyMovement()
@@ -38,20 +38,24 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-            //if other is player
-        if (other == GameObject.FindWithTag("Player"))
+        if (other.tag == "Player")
         {
-            Destroy(this.gameObject);
-            Debug.Log("destroy enemy");
-        }
-            //damage the player
+            Destroy(gameObject);
 
-            //if other is laser
+            Player player = other.transform.GetComponent<Player>();
 
-        if (other == GameObject.FindWithTag("Laser")){
+            if(player != null)
+            {
+                player.Damage(); 
+            }
+        
+        }          
 
-            Destroy(this.gameObject);
-            Debug.Log("Laser destroy enemy");
+        if (other.tag == "Laser"){
+
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+           
         }
          
     }
