@@ -53,9 +53,9 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        _lives --;
+        _lives -= 1;
 
-            if (_lives < 1)
+        if (_lives < 1)
         {
             Destroy(gameObject);
         }

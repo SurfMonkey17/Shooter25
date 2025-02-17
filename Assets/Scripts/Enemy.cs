@@ -6,8 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private float _enemySpeed = 4f;
-
-    
+        
     private float _topBoundary = 7.8f;
     private float _bottomBoundary = -5.7f;
     private float _leftBoundary = -9f;
@@ -20,8 +19,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        EnemyMovement();
-        
+        EnemyMovement();        
     }
 
     void EnemyMovement()
@@ -33,22 +31,21 @@ public class Enemy : MonoBehaviour
             transform.position = (new Vector3(Random.Range(_leftBoundary, _rightBoundary), _topBoundary, 0));
 
         }
-
     }    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Destroy(gameObject);
-
             Player player = other.transform.GetComponent<Player>();
-
-            if(player != null)
+            
+            if (player != null)
             {
+                Debug.Log("Damaging Player");
                 player.Damage(); 
             }
-        
+
+            Destroy(this.gameObject);
         }          
 
         if (other.tag == "Laser"){
