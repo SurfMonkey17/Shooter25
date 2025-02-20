@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private const bool V = true;
     [SerializeField] private float _speed = 5f;
-    [SerializeField] private int _lives = 3; 
+    [SerializeField] private int _lives = 3;
 
     [Header("Boundaries")]
     [SerializeField] private float _topBoundary = 0f;
     [SerializeField] private float _bottomBoundary = -3.8f;
-    [SerializeField] private float _leftBoundary = -11.3f;
-    [SerializeField] private float _rightBoundary = 11.3f;
+    [SerializeField] private float _leftBoundary = -11.2f;
+    [SerializeField] private float _rightBoundary = 11.2f;
 
     [Header("Laser")]
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private float _fireRate = 0.15f;
     private float _canFire = -1f;
-  
+
+    [SerializeField] private bool _canUseBomb = true;
+    public Bomb bomb;
+
 
     void Start()
     {
@@ -33,7 +37,13 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
-        
+
+        if (Input.GetKeyDown(KeyCode.R) && (_canUseBomb == true))
+        {
+            StartCoroutine(Bomb.CreateBomb());
+        }
+
+
     }
 
     void CalculateMovement()
@@ -48,7 +58,7 @@ public class Player : MonoBehaviour
         float clampedY = Mathf.Clamp(transform.position.y, _bottomBoundary, _topBoundary);
         float wrappedX = Mathf.Repeat(transform.position.x - _leftBoundary, _rightBoundary - _leftBoundary) + _leftBoundary;
 
-        transform.position = new Vector3(wrappedX, clampedY, 0); 
+        transform.position = new Vector3(wrappedX, clampedY, 0);
     }
 
     public void Damage()
@@ -62,11 +72,11 @@ public class Player : MonoBehaviour
     }
 
     void FireLaser()
-    {     
+    {
         _canFire = Time.time + _fireRate;
-        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity); 
+        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
 
     }
-    
-
 }
+
+   
