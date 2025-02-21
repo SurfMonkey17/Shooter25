@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    [SerializeField] private float _bombTimer = 3f;  
+    [SerializeField] private float _bombSpeed = 3f;
+    [SerializeField] private ParticleSystem _explosion;
+    [SerializeField] private MeshRenderer _bombModel;
     void Start()
     {
-        
+        Debug.Log("BombScript started");
+        StartCoroutine(BombTimer());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        {
+            transform.Translate(Vector3.up * Time.deltaTime * _bombSpeed);
+        }
+    }
+     IEnumerator BombTimer()
+    {   
+        yield return new WaitForSeconds(_bombTimer);
+        _explosion.Play();
+        _bombModel.enabled = false;    
     }
 
-
+    
 }

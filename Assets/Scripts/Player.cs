@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private const bool V = true;
+    [Header("Player")]
     [SerializeField] private float _speed = 5f;
     [SerializeField] private int _lives = 3;
 
@@ -19,8 +19,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float _fireRate = 0.15f;
     private float _canFire = -1f;
 
-    [SerializeField] private bool _canUseBomb = true;
-    public Bomb bomb;
+    [Header("Bomb")]
+    [SerializeField] private GameObject _bombPrefab;
+    [SerializeField] private float _bombCooldown = 10f;
+    private bool _canUseBomb = true;
+    
+
 
 
     void Start()
@@ -31,16 +35,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+        LaunchBomb();
 
         if (Input.GetKeyDown(KeyCode.Space) && (Time.time > _canFire))
         {
             FireLaser();
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.R) && (_canUseBomb == true))
-        {
-            StartCoroutine(Bomb.CreateBomb());
         }
 
 
@@ -73,8 +72,27 @@ public class Player : MonoBehaviour
 
     void FireLaser()
     {
-        _canFire = Time.time + _fireRate;
-        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        
+            _canFire = Time.time + _fireRate;
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+
+    }
+
+    void LaunchBomb()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && (_canUseBomb == true))
+        {
+            GameObject bomb = Instantiate(_bombPrefab, transform.position, Quaternion.identity);
+            _canUseBomb = false;
+            StartCoroutine(BombCooldown());
+            
+        }
+    }
+
+    IEnumerator BombCooldown()
+    {
+        yield return new WaitForSeconds(_bombCooldown);
+        _canUseBomb = true;
 
     }
 }

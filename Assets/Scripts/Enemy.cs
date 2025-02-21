@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private float _enemySpeed = 4f;
+    [SerializeField] private int _health = 100; 
+
         
     private float _topBoundary = 7.8f;
     private float _bottomBoundary = -5.7f;
@@ -33,6 +35,15 @@ public class Enemy : MonoBehaviour
         }
     }    
 
+    public void takeDamage(int value)
+    {
+        _health -= value;
+        if (_health <= )
+        {
+            DestroyEnemy();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -53,6 +64,12 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             Destroy(other.gameObject);
            
+        }
+
+        public void DestroyEnemy()
+        {
+            explosion.Play();
+            _enemyModel.GetComponent<MeshRenderer>().enabled = false;
         }
          
     }
