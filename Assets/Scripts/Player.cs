@@ -23,14 +23,23 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _bombPrefab;
     [SerializeField] private float _bombCooldown = 10f;
     private bool _canUseBomb = true;
-    
+
+    [SerializeField] private GameObject _weaponPosition;
+    private SpawnManager _spawnManager;
+
 
 
 
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        
+        if (_spawnManager == null)
+        { 
+            Debug.LogError("The Spawn Manager is NULL.");
+        }
     }
+        
 
     void Update()
     {
@@ -66,6 +75,7 @@ public class Player : MonoBehaviour
 
         if (_lives < 1)
         {
+            _spawnManager.OnPlayerDeath();
             Destroy(gameObject);
         }
     }
@@ -74,7 +84,7 @@ public class Player : MonoBehaviour
     {
         
             _canFire = Time.time + _fireRate;
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+            GameObject bullet = Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
 
     }
 

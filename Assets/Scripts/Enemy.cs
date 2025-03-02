@@ -38,9 +38,9 @@ public class Enemy : MonoBehaviour
     public void takeDamage(int value)
     {
         _health -= value;
-        if (_health <= )
+        if (_health <= 0)
         {
-            DestroyEnemy();
+            Destroy(this.gameObject);
         }
     }
 
@@ -66,12 +66,7 @@ public class Enemy : MonoBehaviour
            
         }
 
-        public void DestroyEnemy()
-        {
-            explosion.Play();
-            _enemyModel.GetComponent<MeshRenderer>().enabled = false;
-        }
-         
+        
     }
 
     
